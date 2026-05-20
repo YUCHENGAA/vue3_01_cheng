@@ -13,7 +13,8 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "element-plus/global"  // ← 新增
     ],
     "paths": {
       "@/*": [
@@ -29,6 +30,7 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.d.ts",   // ← 新增，讓 TS 讀取自訂宣告檔
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
