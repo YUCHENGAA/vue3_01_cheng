@@ -1,19 +1,17 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
+  <LoginPage />
   <PolicyView />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-// import HelloWorld from './components/HelloWorld.vue';
-import PolicyView from './components/PolicyView.vue';
-
+import PolicyView from './page/PolicyView.vue';
+import LoginPage from './page/LoginPage.vue';
 export default defineComponent({
   name: 'App',
   components: {
-    // HelloWorld,
-    PolicyView
+    PolicyView,
+    LoginPage
   }
 });
 </script>
@@ -26,5 +24,11 @@ export default defineComponent({
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+body {
+  min-height: 100vh;
+  background-color: #dce8f5;
+  padding: 2rem;
+  /* font-family: 'Noto Sans TC', 'Segoe UI', sans-serif; */
 }
 </style>
