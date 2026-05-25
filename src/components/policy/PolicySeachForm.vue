@@ -1,39 +1,47 @@
 <script setup lang="ts">
-import {ref, reactive, computed, watch} from 'vue'
+import { ref, reactive, computed, watch } from "vue";
 
 const props = defineProps<{
-  loading: boolean
-}>()
+  loading: boolean;
+}>();
 
 const searchBox = reactive({
-    policyNo: '',
-})//    holderName: ''
-
+  policyNo: "",
+});
 
 const emit = defineEmits<{
-  submit: [policyNo: string]//, holderName: string
-}>()
+  submit: [policyNo: string];
+}>();
 
-const policyNo = ref('')
+const policyNo = ref("");
 //const holderName = ref('')
 
 function onSubmit() {
-  emit('submit', policyNo.value.trim())//, holderName.value.trim()
+  emit("submit", policyNo.value.trim().toUpperCase());
 }
 
 // const policyNoShow = computed(()=> searchBox.policyNo.trim().toUpperCase())
 // const policyNoFormatted = computed(() => searchBox.policyNo.trim().toUpperCase())
-
 </script>
 
 <template>
   <form @submit.prevent="onSubmit">
-    <label for="policyNo">保單號</label>
-    <input id="policyNo" v-model="policyNo" type="text" />
-    <!-- <label for="holderName">被保人</label>
-    <input id="holderName" v-model="holderName" type="text" /> -->
-    <button type="submit" :disabled="props.loading || !policyNo.trim()">
-      {{ props.loading ? '查詢中...' : '查詢' }}
-    </button>
+    <div class="form-row">
+      <label for="policyNo">保單號</label>
+      <input id="policyNo" v-model="policyNo" type="text" />
+
+      <button type="submit">
+        {{ props.loading ? "查詢中..." : "查詢" }}
+      </button>
+    </div>
   </form>
 </template>
+
+<style lang="css">
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* label 和 input 之間的距離 */
+  margin-bottom: 12px;
+}
+</style>

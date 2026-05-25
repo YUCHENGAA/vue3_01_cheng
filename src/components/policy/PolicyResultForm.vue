@@ -2,8 +2,9 @@
 import type { Policy } from "@/types/policy";
 
 defineProps<{
-  policy: Policy | null;
+  policies: Policy[] | null;
   loading: boolean;
+  error: string
 }>();
 console.log();
 </script>
@@ -11,12 +12,15 @@ console.log();
 <template>
   <div>
     <p v-if="loading">載入中......</p>
-    <template v-else-if="policy">
+    <div v-else-if="policies">
+      <template  v-for="policy in policies" :key="policy.policyNo">
       <p>保單號：{{ policy.policyNo }}</p>
       <p>保戶姓名：{{ policy.holderName }}</p>
       <p>商品代碼：{{ policy.productName }}</p>
       <p>保單狀態：{{ policy.status }}</p>
+      <hr>
     </template>
+    </div>    
     <p v-else>尚無資料</p>
   </div>
 </template>

@@ -6,13 +6,12 @@ import PolicySeachForm from "@/components/policy/PolicySeachForm.vue";
 import { getPolicyResult } from "@/severs/policyResult";
 import HeaderSection from "@/components/share/HeaderSection.vue";
 
-const policy = ref<Policy | null>(null);
+const policies = ref<Policy[]>([])
 const searchBox = reactive({
   policyNo: "",
 });
 const loading = ref(false);
 const error = ref("");
-// const results = ref<Policy[]>([])
 
 // const policyNoShow = computed(()=> searchBox.policyNo.trim().toUpperCase())
 const policyNoFormatted = computed(() =>
@@ -27,15 +26,14 @@ watch(
 );
 
 async function search(policyNo: string) {
-  //, holderName: string
   loading.value = true;
   error.value = "";
 
   try {
-    policy.value = await getPolicyResult(policyNo); //, holderName
-    console.log("policy.value= ", policy.value);
+    policies.value = await getPolicyResult(policyNo);
+    console.log("policy.value= ", policies.value);
   } catch (e) {
-    policy.value = null;
+    policies.value = [];
     error.value = "查詢失敗，請確認保單號或稍後再試";
   } finally {
     loading.value = false;
@@ -57,17 +55,17 @@ async function search(policyNo: string) {
         <template v-slot:title> 查詢結果 </template>
       </HeaderSection>
       <p v-if="error">{{ error }}</p>
-      <PolicyResultForm
-        v-if="policy || loading"
-        :policy="policy"
+      <!-- <PolicyResultForm
+        v-if="policies.length > 0 || loading"
+        :policies="policies"
         :loading="loading"
-      />
+      /> -->
+      <PolicyResultForm v-bind="{ policies, loading, error }" />
     </div>
   </div>
 </template>
 
 <style lang="css">
-
 /* ── 整體容器 ── */
 .head {
   /* min-height: 100vh; */
@@ -75,6 +73,7 @@ async function search(policyNo: string) {
   padding: 2rem;
   /* width: 500px; */
   min-height: 300px;
+  text-align: center;
 }
 
 /* ── 頁面標題 ── */
@@ -92,10 +91,10 @@ async function search(policyNo: string) {
   background: #dce8f5;
   border: 1px solid #b8d0ea;
   border-radius: 10px;
-  padding: 1.25rem;
+  padding: 1rem;
   display: inline-block;
   vertical-align: top;
-  width: 300px;
+  width: 350px;
   min-height: 200px;
 }
 
