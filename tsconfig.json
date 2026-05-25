@@ -12,10 +12,13 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": [
-      "webpack-env",
-      "element-plus/global"  // ← 新增
-    ],
+    "noImplicitAny": false,
+    "allowJs": true,
+    // "types": [
+    //   "webpack-env",
+    //   "element-plus/global",  // ← 新增
+    //   "vue-router"
+    // ],
     "paths": {
       "@/*": [
         "src/*"
