@@ -1,8 +1,9 @@
 //Options API寫法
 <!-- <script lang="ts">
 import {users} from '@/data/userData'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent ({
     data() {
         return {
             loginForm:{
@@ -15,12 +16,12 @@ export default {
     },
     watch: {
         'loginForm.username'() {
-        this.error = ''
+            this.error = ''
         },
         'loginForm.password'() {
-        this.error = ''
+            this.error = ''
         }
-  },
+    },
     methods: {
         async login() {
             this.loading = true
@@ -40,7 +41,7 @@ export default {
         },
     },
 
-}
+})
 </script> -->
 
 // Composition API寫法
@@ -49,18 +50,32 @@ import { useAuthForm } from '@/composables/useAuthForm'
 
 const { loginForm, loading, error, login } = useAuthForm();
 
+const emit = defineEmits<{
+  (e: 'login-success'): void
+}>()
+
+async function handleLogin() {
+  await login();
+  if (!error.value) {
+    emit('login-success');
+  }
+}
 </script>
 
 <template>
   <div class="section">
     <h2>保單登入</h2>
-    <label>帳號:</label>
+    <div class="form-row">
+      <label>帳號</label>
     <input v-model="loginForm.username" placeholder="請輸入帳號" />
-    <br />
-    <label>密碼:</label>
+    </div>
+    <div class="form-row">
+       <label>密碼</label>
     <input v-model="loginForm.password" placeholder="請輸入密碼" />
+    </div>
+   
     <br />
-    <button @click="login">登入</button>
+    <button @click="handleLogin" >登入</button>
     <p v-if="loading">登入中......</p>
     <p v-else-if="error">{{ error }}</p>
   </div>
@@ -68,26 +83,35 @@ const { loginForm, loading, error, login } = useAuthForm();
 
 <style lang="css">
 /* ── 整體容器 ── */
-.section {
-  /* min-height: 100vh; */
-  background-color: white;
+/* .section {
   padding: 2rem;
   margin: 2rem;
-  /* width: 500px; */
   min-height: 200px;
-}
+} */
 
 /* ── 頁面標題 ── */
 .head h2 {
   font-size: 1.1rem;
   font-weight: 600;
   color: #2c4a6e;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.04em;
+  /* margin-bottom: 1.5rem; */
+  /* letter-spacing: 0.04em; */
 }
-.button {
+/* .button {
     margin-top: 20px;
+} */
+/* .form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+} */
+
+.form-row label {
+  /* width: 50px; */
+  flex-shrink: 0;
 }
+
 /* ── 兩欄 Grid 佈局 ── */
 /* .section-a,
 .section-b {
