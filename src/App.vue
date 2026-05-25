@@ -41,13 +41,11 @@ const route = useRoute();
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
-  // margin-left: 50px;
+  // margin-top: 60px;
 }
 body {
   min-height: 100vh;
   background-color: #dce8f5;
-  padding: 2rem;
 }
 // .app-layout {
 //   min-height: 100vh;

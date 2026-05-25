@@ -13,13 +13,13 @@ defineProps<{
     <div v-else-if="products">
       <template  v-for="product in products" :key="product.productNo">
       <p>商品編號：{{ product.productNo }}</p>
-      <p>商品名稱{{ product.productName }}</p>
+      <p>商品名稱：{{ product.productName }}</p>
       <p>商品庫存：{{ product.productCount }}</p>
       <p>商品分類：{{ product.productCategory }}</p>
       <hr>
     </template>
     </div>    
-    <p v-else>尚無資料</p>
+    <p v-else>查無資料</p>
   </div>
 </template>
 

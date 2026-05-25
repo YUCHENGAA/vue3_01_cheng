@@ -9,10 +9,9 @@ defineProps<{
 
 <template>
   <aside class="app-sidebar">
-    <!-- <div class="app-sidebar__brand">
-      <strong>課堂練習導航</strong>
-      <p>用 Vue Router 控制不同練習主題的頁面切換，讓每個主題都有自己的網址。</p>
-    </div> -->
+    <div class="app-sidebar__brand">
+      <strong>課堂練習題</strong>
+    </div>
 
     <nav class="sidebar-nav" aria-label="練習主題選單">
       <RouterLink

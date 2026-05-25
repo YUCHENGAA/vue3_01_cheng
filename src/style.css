@@ -609,3 +609,27 @@ dt {
   /* width: 500px; */
   min-height: 200px;
 }
+
+.buttons-row button {
+  padding: 6px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.buttons-row button:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.buttons-row button:active {
+  transform: scale(0.97);
+}
+
+.buttons-row button.is-active {
+  background: #727476;
+  color: #1d4ed8;
+  border-color: #93c5fd;
+}
